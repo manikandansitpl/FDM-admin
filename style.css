@@ -29,4 +29,22 @@
     justify-content: center;
     margin-bottom: 20px;
 }
+
+.toastBody {
+    color: white;
+    font-size: 0.875rem;
+}
+.toastProgress {
+    background: rgb(89, 199, 89) !important; 
+}
+
+.registerToast {
+    color: white;
+    background-color: rgb(147, 217, 147);
+    font-size: 0.875rem;
+}
+
+.registerBody {
+    background: white;
+}
 /* npm run dev       */
