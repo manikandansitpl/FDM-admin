@@ -21,10 +21,10 @@ const Page = () => (
       <Container maxWidth="lg">
         <Stack spacing={3}>
           <Typography variant="h4">
-            Settings
+            Post News
           </Typography>
           <SettingsNotifications />
-          <SettingsPassword />
+          {/* <SettingsPassword /> */}
         </Stack>
       </Container>
     </Box>
