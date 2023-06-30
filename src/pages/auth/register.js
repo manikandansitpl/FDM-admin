@@ -6,36 +6,45 @@ import * as Yup from 'yup';
 import { Box, Button, Link, Stack, TextField, Typography } from '@mui/material';
 import { useAuth } from 'src/hooks/use-auth';
 import { Layout as AuthLayout } from 'src/layouts/auth/layout';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Page = () => {
   const router = useRouter();
   const auth = useAuth();
   const formik = useFormik({
     initialValues: {
-      email: '',
-      name: '',
-      password: '',
-      submit: null
+      Email: '',
+      Name: '',
+      Password: '',
     },
     validationSchema: Yup.object({
-      email: Yup
+      Email: Yup
         .string()
         .email('Must be a valid email')
         .max(255)
         .required('Email is required'),
-      name: Yup
+      Name: Yup
         .string()
         .max(255)
         .required('Name is required'),
-      password: Yup
+      Password: Yup
         .string()
         .max(255)
         .required('Password is required')
     }),
     onSubmit: async (values, helpers) => {
       try {
-        await auth.signUp(values.email, values.name, values.password);
-        router.push('/');
+          const url = 'http://52.55.150.42:8000/api/person/register'
+        await axios.post(url, values)
+        .then(function(response){
+          toast(response.data.message)
+          console.log(response.status);
+        })
+        .catch(function(error){
+          toast(error)
+          console.log(error.status);
+        })
       } catch (err) {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
@@ -46,6 +55,13 @@ const Page = () => {
 
   return (
     <>
+    <ToastContainer 
+       pauseOnHover
+       draggable
+       rtl={false}
+       progressClassName="registerToast"
+       bodyClassName="registerBody"
+    />
       <Head>
         <title>
           Register | Devias Kit
@@ -97,36 +113,36 @@ const Page = () => {
             >
               <Stack spacing={3}>
                 <TextField
-                  error={!!(formik.touched.name && formik.errors.name)}
+                  error={!!(formik.touched.Name && formik.errors.Name)}
                   fullWidth
-                  helperText={formik.touched.name && formik.errors.name}
+                  helperText={formik.touched.Name && formik.errors.Name}
                   label="Name"
-                  name="name"
+                  name="Name"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  value={formik.values.name}
+                  value={formik.values.Name}
                 />
                 <TextField
-                  error={!!(formik.touched.email && formik.errors.email)}
+                  error={!!(formik.touched.Email && formik.errors.Email)}
                   fullWidth
-                  helperText={formik.touched.email && formik.errors.email}
+                  helperText={formik.touched.Email && formik.errors.Email}
                   label="Email Address"
-                  name="email"
+                  name="Email"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   type="email"
-                  value={formik.values.email}
+                  value={formik.values.Email}
                 />
                 <TextField
-                  error={!!(formik.touched.password && formik.errors.password)}
+                  error={!!(formik.touched.Password && formik.errors.Password)}
                   fullWidth
-                  helperText={formik.touched.password && formik.errors.password}
+                  helperText={formik.touched.Password && formik.errors.Password}
                   label="Password"
-                  name="password"
+                  name="Password"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   type="password"
-                  value={formik.values.password}
+                  value={formik.values.Password}
                 />
               </Stack>
               {formik.errors.submit && (
