@@ -35,7 +35,7 @@ export const OverviewBudget = (props) => {
               No. of posts
             </Typography>
             <Typography variant="h4">
-              {post.length}
+              {post ? post.length :post.length}
             </Typography>
           </Stack>
           <Avatar
