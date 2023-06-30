@@ -3,10 +3,21 @@ import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
 import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
 import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
 export const OverviewBudget = (props) => {
+  const [post, setPost] = React.useState([]);
   const { difference, positive = false, sx, value } = props;
-
+  useEffect(()=>{
+    axios.get('http://52.55.150.42:8000/api/person/getNews')
+      .then((respone)=>{
+       setPost(respone.data);
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+  },[])
   return (
     <Card sx={sx}>
       <CardContent>
@@ -21,10 +32,10 @@ export const OverviewBudget = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Budget
+              No. of posts
             </Typography>
             <Typography variant="h4">
-              {value}
+              {post.length}
             </Typography>
           </Stack>
           <Avatar

@@ -25,9 +25,9 @@ export const SettingsNotifications = () => {
 
   const handleSubmit =(e)=>{
     e.preventDefault();
-    const url = "http://localhost:8000/api/person/fdmNews"
+    const url = "http://52.55.150.42:8000/api/person/fdmNews"
     axios.post(url,{Title,News,Img} )
-    .then(res => console.log(res))
+    .then(res => console.log(res.data.message))
     .catch(er => console.log(er))
   }
   const handleChange= async(e)=>{
@@ -52,7 +52,7 @@ export const SettingsNotifications = () => {
               <Stack spacing={1}>
                 <Box
                   sx={{
-                    width: 1000,
+                    width: 10000,
                     maxWidth: '100%',
                   }}
                 >
