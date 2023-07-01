@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { serviceApi } from 'src/api docs/api';
 
 
 export const SettingsNotifications = () => {
@@ -28,7 +29,7 @@ export const SettingsNotifications = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://52.55.150.42:8000/api/person/fdmNews"
+    const url = serviceApi.latestPost;
     axios.post(url, { Title, News, Img })
       .then(res =>
         toast(res.data.message),

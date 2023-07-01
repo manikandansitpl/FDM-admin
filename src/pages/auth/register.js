@@ -8,6 +8,7 @@ import { useAuth } from 'src/hooks/use-auth';
 import { Layout as AuthLayout } from 'src/layouts/auth/layout';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { serviceApi } from 'src/api docs/api';
 
 const Page = () => {
   const router = useRouter();
@@ -35,16 +36,15 @@ const Page = () => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-          const url = 'http://52.55.150.42:8000/api/person/register'
+        const url = serviceApi.registerUser;
         await axios.post(url, values)
-        .then(function(response){
-          toast(response.data.message)
-          console.log(response.status);
-        })
-        .catch(function(error){
-          toast(error)
-          console.log(error.status);
-        })
+          .then(function (response) {
+            toast(response.data.message);
+          })
+          .catch(function (error) {
+            toast(error)
+            console.log(error.status);
+          })
       } catch (err) {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
@@ -55,13 +55,13 @@ const Page = () => {
 
   return (
     <>
-    <ToastContainer 
-       pauseOnHover
-       draggable
-       rtl={false}
-       progressClassName="registerToast"
-       bodyClassName="registerBody"
-    />
+      <ToastContainer
+        pauseOnHover
+        draggable
+        rtl={false}
+        progressClassName="registerToast"
+        bodyClassName="registerBody"
+      />
       <Head>
         <title>
           Register | Devias Kit

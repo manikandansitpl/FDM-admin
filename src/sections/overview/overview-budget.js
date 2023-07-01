@@ -5,12 +5,13 @@ import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { serviceApi } from 'src/api docs/api';
 
 export const OverviewBudget = (props) => {
   const [post, setPost] = React.useState([]);
   const { difference, positive = false, sx, value } = props;
   useEffect(()=>{
-    axios.get('http://52.55.150.42:8000/api/person/getNews')
+    axios.get(serviceApi.getLatestPost)
       .then((respone)=>{
        setPost(respone.data);
       })
