@@ -3,15 +3,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {
   Button,
-  Card,
   CardActions,
-  CardContent,
-  CardHeader,
-  Checkbox,
   Divider,
-  FormControlLabel,
   Stack,
-  Typography,
   Unstable_Grid2 as Grid
 } from '@mui/material';
 import axios from 'axios';
@@ -19,8 +13,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 export const SettingsNotifications = () => {
-  const [Message, setMessage] = useState("")
-  const [Error, setError] = useState("")
   const [Title, setTitle] = useState("");
   const [News, setNews] = useState("");
   const [Img, setImg] = useState("");
@@ -28,7 +20,11 @@ export const SettingsNotifications = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://52.55.150.42:8000/api/person/fdmNews"
+    toast("Uploading...")
+   sendImage()
+  }
+  const sendImage=()=>{
+    const url = "http://localhost:8000/api/person/fdmNews"
     axios.post(url, { Title, News, Img })
       .then(res =>
         toast(res.data.message),
@@ -50,12 +46,14 @@ export const SettingsNotifications = () => {
       <div>
         <ToastContainer 
           theme='dark'
+          Type='success'
           pauseOnHover
           draggable
           rtl={false}
           progressClassName="toastProgress"
           bodyClassName="toastBody"
         />
+        
         <Grid
           container
           spacing={6}
