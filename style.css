@@ -47,4 +47,7 @@
 .registerBody {
     background: white;
 }
+.uploadProgress{
+    background-color: rgb(242, 242, 22);
+}
 /* npm run dev       */

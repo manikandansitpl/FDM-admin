@@ -3,15 +3,9 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {
   Button,
-  Card,
   CardActions,
-  CardContent,
-  CardHeader,
-  Checkbox,
   Divider,
-  FormControlLabel,
   Stack,
-  Typography,
   Unstable_Grid2 as Grid
 } from '@mui/material';
 import axios from 'axios';
@@ -20,8 +14,6 @@ import { serviceApi } from 'src/api docs/api';
 
 
 export const SettingsNotifications = () => {
-  const [Message, setMessage] = useState("")
-  const [Error, setError] = useState("")
   const [Title, setTitle] = useState("");
   const [News, setNews] = useState("");
   const [Img, setImg] = useState("");
@@ -51,12 +43,14 @@ export const SettingsNotifications = () => {
       <div>
         <ToastContainer 
           theme='dark'
+          Type='success'
           pauseOnHover
           draggable
           rtl={false}
           progressClassName="toastProgress"
           bodyClassName="toastBody"
         />
+        
         <Grid
           container
           spacing={6}
