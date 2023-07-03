@@ -8,11 +8,18 @@ import { AuthConsumer, AuthProvider } from 'src/contexts/auth-context';
 import { useNProgress } from 'src/hooks/use-nprogress';
 import { createTheme } from 'src/theme';
 import { createEmotionCache } from 'src/utils/create-emotion-cache';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import optionReducer from '../redux/reducer'
 import 'simplebar-react/dist/simplebar.min.css';
 import"../../style.css";
 import 'react-toastify/dist/ReactToastify.css';
 
 const clientSideEmotionCache = createEmotionCache();
+
+const store = configureStore({
+  reducer:{option : optionReducer}
+})
 
 const SplashScreen = () => null;
 
@@ -26,6 +33,7 @@ const App = (props) => {
   const theme = createTheme();
 
   return (
+    <Provider store={store}> 
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
@@ -51,6 +59,8 @@ const App = (props) => {
         </AuthProvider>
       </LocalizationProvider>
     </CacheProvider>
+    </Provider>
+ 
   );
 };
 

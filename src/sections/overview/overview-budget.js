@@ -6,14 +6,18 @@ import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/mate
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { serviceApi } from 'src/api docs/api';
+import { useDispatch } from 'react-redux';
+import { changeOption } from 'src/redux/reducer';
 
 export const OverviewBudget = (props) => {
+  const dispatch = useDispatch()
   const [post, setPost] = React.useState([]);
   const { difference, positive = false, sx, value } = props;
   useEffect(()=>{
     axios.get(serviceApi.getLatestPost)
-      .then((respone)=>{
-       setPost(respone.data);
+      .then((posts)=>{
+       setPost(posts.data);
+       dispatch(changeOption({post:posts?.data}))
       })
       .catch((error)=>{
         console.log(error);
@@ -36,7 +40,7 @@ export const OverviewBudget = (props) => {
               No. of posts
             </Typography>
             <Typography variant="h4">
-              {post ? post.length :post.length}
+              {post ? post.length :post?.length}
             </Typography>
           </Stack>
           <Avatar

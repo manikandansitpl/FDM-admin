@@ -36,19 +36,22 @@ const Page = () => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-        const url = serviceApi.registerUser;
+        // const url = serviceApi.registerUser;
+        const url = "http://localhost:8000/api/person/Register";
         await axios.post(url, values)
           .then(function (response) {
             toast(response.data.message);
+            console.log(response)
           })
           .catch(function (error) {
-            toast(error)
-            console.log(error.status);
+            toast(error.response.data.message);
+            console.log(error.response.data.message);
           })
-      } catch (err) {
+      } catch (error) {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
         helpers.setSubmitting(false);
+
       }
     }
   });

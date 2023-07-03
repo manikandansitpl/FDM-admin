@@ -2,11 +2,15 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { changeOption } from 'src/redux/reducer';
 
 function ComboBox(props) {
+const dispatch = useDispatch()
     const { autoComplete } = props;
     const [named, setNamed] = React.useState("")
     const handleChange = (newvalue) => {
+        dispatch(changeOption({name :newvalue.label}))
         if (newvalue) {
             sessionStorage.setItem('categories', newvalue?.label)
             setNamed(newvalue)
@@ -16,6 +20,8 @@ function ComboBox(props) {
             setNamed(newvalue)
         }
 
+
+
     }
     useEffect(() => {
         autoComplete(named);
@@ -23,7 +29,6 @@ function ComboBox(props) {
     return (
         <Autocomplete
             onChange={(e, newvalue) => handleChange(newvalue)}
-            value={named.label}
             id="combo-box-demo"
             options={top100Films}
             sx={{ width: 300 }}
@@ -43,7 +48,4 @@ const top100Films = [
     { label: 'Post Latest NEWS', id: 'latestNews' },
     { label: 'Post Latest NEWS', id: 'latestNews' },
 ];
-
-
-
-export default ComboBox;
+export default ComboBox

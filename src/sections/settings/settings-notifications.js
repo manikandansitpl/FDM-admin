@@ -11,25 +11,29 @@ import {
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { serviceApi } from 'src/api docs/api';
+import { useSelector } from 'react-redux';
 
 
 export const SettingsNotifications = () => {
+  const option = useSelector(state => state.option.value)
   const [Title, setTitle] = useState("");
   const [News, setNews] = useState("");
   const [Img, setImg] = useState("");
   const sorce = "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_1280.png"
 
+ console.log(option?.post)
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = serviceApi.latestPost;
+    // const url = serviceApi.latestPost;
+    const url = "http://localhost:8000/api/person/trendingNews";
     axios.post(url, { Title, News, Img })
       .then(res =>
         toast(res.data.message),
-        setTitle(""),
-        setNews(""),
-        setImg("")
+        // setTitle(""),
+        // setNews(""),
+        // setImg("")
       )
-      .catch(er => console.log(er))
+      .catch(er => console.log(er?.response?.data?.message))
   }
   const handleChange = async (e) => {
     const file = e.target.files[0]
