@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {
@@ -12,9 +12,12 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { serviceApi } from 'src/api docs/api';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 export const SettingsNotifications = () => {
+  const [url, setUrl] = useState("")
+const dispatch = useDispatch()
   const option = useSelector(state => state.option.value)
   const [Title, setTitle] = useState("");
   const [News, setNews] = useState("");
@@ -23,12 +26,11 @@ export const SettingsNotifications = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url;
     // const url = serviceApi.latestPost;
-    if(option.name.label === "Post Latest NEWS"){
-      url = serviceApi.latestPost;
-    } else if(option.name.label === "Post Trending NEWS"){
-      url = serviceApi.trendingNews;
+    if(option?.name?.label === "Post Latest NEWS"){
+       setUrl(serviceApi.latestPost);
+    } else if(option?.name?.label === "Post Trending NEWS"){
+      setUrl(serviceApi.trendingNews);
     } 
     axios.post(url, { Title, News, Img })
       .then(res =>
@@ -45,6 +47,13 @@ export const SettingsNotifications = () => {
     setImg(base64)
 
   }
+  useEffect(()=>{
+    if(option?.name?.label === "Post Latest NEWS"){
+      setUrl(serviceApi.latestPost);
+   } else if(option?.name?.label === "Post Trending NEWS"){
+     setUrl(serviceApi.trendingNews);
+   } 
+  },[])
 
   return (
     <form >
