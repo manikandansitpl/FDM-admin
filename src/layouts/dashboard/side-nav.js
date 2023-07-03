@@ -13,16 +13,15 @@ import {
   Typography,
   useMediaQuery
 } from '@mui/material';
-import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
 import { items } from './config';
 import { SideNavItem } from './side-nav-item';
 
+const newImages = require('../../image/logo.png')
 export const SideNav = (props) => {
   const { open, onClose } = props;
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-
   const content = (
     <Scrollbar
       sx={{
@@ -52,7 +51,7 @@ export const SideNav = (props) => {
               width: 32
             }}
           >
-            <Logo />
+            <img src={newImages}/>
           </Box>
           <Box
             sx={{

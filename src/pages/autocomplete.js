@@ -10,7 +10,7 @@ const dispatch = useDispatch()
     const { autoComplete } = props;
     const [named, setNamed] = React.useState("")
     const handleChange = (newvalue) => {
-        dispatch(changeOption({name :newvalue.label}))
+        dispatch(changeOption({name :newvalue}))
         if (newvalue) {
             sessionStorage.setItem('categories', newvalue?.label)
             setNamed(newvalue)
@@ -19,9 +19,6 @@ const dispatch = useDispatch()
             sessionStorage.setItem('categories', "Please select category!")
             setNamed(newvalue)
         }
-
-
-
     }
     useEffect(() => {
         autoComplete(named);
@@ -44,8 +41,8 @@ const top100Films = [
     { label: 'Songs (lyrics)', id: 'songs' },
     { label: 'Movies', id: 'movies' },
     { label: 'Stocks', id: 'stocks' },
-    { label: 'Crypto', id: 'crypto' },
+    { label: 'Trading', id: 'trading' },
     { label: 'Post Latest NEWS', id: 'latestNews' },
-    { label: 'Post Latest NEWS', id: 'latestNews' },
+    { label: 'Post Trending NEWS', id: 'trendingNews' },
 ];
 export default ComboBox

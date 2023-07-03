@@ -21,17 +21,21 @@ export const SettingsNotifications = () => {
   const [Img, setImg] = useState("");
   const sorce = "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_1280.png"
 
- console.log(option?.post)
   const handleSubmit = (e) => {
     e.preventDefault();
+    let url;
     // const url = serviceApi.latestPost;
-    const url = "http://localhost:8000/api/person/trendingNews";
+    if(option.name.label === "Post Latest NEWS"){
+      url = serviceApi.latestPost;
+    } else if(option.name.label === "Post Trending NEWS"){
+      url = serviceApi.trendingNews;
+    } 
     axios.post(url, { Title, News, Img })
       .then(res =>
         toast(res.data.message),
-        // setTitle(""),
-        // setNews(""),
-        // setImg("")
+        setTitle(""),
+        setNews(""),
+        setImg("")
       )
       .catch(er => console.log(er?.response?.data?.message))
   }
@@ -113,3 +117,4 @@ function base64Conversion(file) {
     }
   })
 }
+
