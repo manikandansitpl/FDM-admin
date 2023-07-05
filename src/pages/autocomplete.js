@@ -37,12 +37,12 @@ function ComboBox(props) {
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
-    { label: 'Astro', id: 'astro' },
-    { label: 'NEWS', id: 'news' },
-    { label: 'Songs (lyrics)', id: 'songs' },
-    { label: 'Movies', id: 'movies' },
-    { label: 'Stocks', id: 'stocks' },
-    { label: 'Trading', id: 'trading' },
+    // { label: 'Astro', id: 'astro' },
+    // { label: 'NEWS', id: 'news' },
+    // { label: 'Songs (lyrics)', id: 'songs' },
+    // { label: 'Movies', id: 'movies' },
+    // { label: 'Stocks', id: 'stocks' },
+    // { label: 'Trading', id: 'trading' },
     { label: 'Post Latest NEWS', id: 'latestNews' },
     { label: 'Post Trending NEWS', id: 'trendingNews' },
 ];

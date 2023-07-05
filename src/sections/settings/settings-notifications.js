@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {
@@ -12,53 +12,61 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { serviceApi } from 'src/api docs/api';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 
 
 export const SettingsNotifications = () => {
-  const [url, setUrl] = useState("")
-const dispatch = useDispatch()
   const option = useSelector(state => state.option.value)
   const [Title, setTitle] = useState("");
   const [News, setNews] = useState("");
   const [Img, setImg] = useState("");
+  const [showImg, setShowImg] = useState("");
   const sorce = "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_1280.png"
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let url;
+    const formData = new FormData()
+
     // const url = serviceApi.latestPost;
-    if(option?.name?.label === "Post Latest NEWS"){
-       setUrl(serviceApi.latestPost);
-    } else if(option?.name?.label === "Post Trending NEWS"){
-      setUrl(serviceApi.trendingNews);
-    } 
-    axios.post(url, { Title, News, Img })
+    if (option?.name?.label === "Post Latest NEWS") {
+      url = serviceApi.latestPost;
+      // formData.append('photo', )
+      // formData.append('Title', Title)
+      // formData.append('News', News)
+    } else if (option?.name?.label === "Post Trending NEWS") {  
+      url = serviceApi.trendingNews;
+      // formData.append('trend', Img)
+      // formData.append('Title', Title)
+      // formData.append('News', News)
+    }
+
+let data ={
+  Img,
+  Title,
+  News
+}
+
+    axios.post(url, data)
       .then(res =>
         toast(res.data.message),
         setTitle(""),
         setNews(""),
-        setImg("")
+        setImg(""),
+        setShowImg("")
       )
-      .catch(er => console.log(er?.response?.data?.message))
+      .catch(er => toast(er?.response?.data))
   }
   const handleChange = async (e) => {
     const file = e.target.files[0]
     const base64 = await new base64Conversion(file)
     setImg(base64)
-
+    // setShowImg(URL.createObjectURL(file))
   }
-  useEffect(()=>{
-    if(option?.name?.label === "Post Latest NEWS"){
-      setUrl(serviceApi.latestPost);
-   } else if(option?.name?.label === "Post Trending NEWS"){
-     setUrl(serviceApi.trendingNews);
-   } 
-  },[])
 
   return (
-    <form >
+    <form onSubmit={handleSubmit}>
       <div>
-        <ToastContainer 
+        <ToastContainer
           theme='dark'
           Type='success'
           pauseOnHover
@@ -67,7 +75,7 @@ const dispatch = useDispatch()
           progressClassName="toastProgress"
           bodyClassName="toastBody"
         />
-        
+
         <Grid
           container
           spacing={6}
@@ -106,7 +114,7 @@ const dispatch = useDispatch()
       </div>
       <Divider />
       <CardActions sx={{ justifyContent: 'flex-start' }}>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button variant="contained" type='submit'>
           Post
         </Button>
       </CardActions>

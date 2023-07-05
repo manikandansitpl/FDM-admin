@@ -17,7 +17,7 @@ export const OverviewBudget = (props) => {
     axios.get(serviceApi.getLatestPost)
       .then((posts)=>{
        setPost(posts.data);
-       dispatch(changeOption({post:posts?.data}))
+      //  dispatch(changeOption({post:posts?.data}))
       })
       .catch((error)=>{
         console.log(error);
