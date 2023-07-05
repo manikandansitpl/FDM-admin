@@ -19,15 +19,15 @@ export const items = [
       </SvgIcon>
     )
   },
-  {
-    title: 'Account',
-    path: '/account',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    )
-  },
+  // {
+  //   title: 'Account',
+  //   path: '/account',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   )
+  // },
   {
     title: 'Login',
     path: '/auth/login',
@@ -37,15 +37,15 @@ export const items = [
       </SvgIcon>
     )
   },
-  {
-    title: 'Post Details',
-    path: '/auth/postDetails',
-    icon: (
-     <SvgIcon fontSize="small">
-        <MdOutlinePostAdd />
-      </SvgIcon>
-    )
-  },
+  // {
+  //   title: 'Post Details',
+  //   path: '/auth/postDetails',
+  //   icon: (
+  //    <SvgIcon fontSize="small">
+  //       <MdOutlinePostAdd />
+  //     </SvgIcon>
+  //   )
+  // },
   {
     title: 'Register',
     path: '/auth/register',

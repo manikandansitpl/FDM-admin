@@ -25,7 +25,7 @@ export const SettingsNotifications = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let url;
-    const formData = new FormData()
+    // const formData = new FormData()
 
     // const url = serviceApi.latestPost;
     if (option?.name?.label === "Post Latest NEWS") {
@@ -33,18 +33,18 @@ export const SettingsNotifications = () => {
       // formData.append('photo', )
       // formData.append('Title', Title)
       // formData.append('News', News)
-    } else if (option?.name?.label === "Post Trending NEWS") {  
+    } else if (option?.name?.label === "Post Trending NEWS") {
       url = serviceApi.trendingNews;
       // formData.append('trend', Img)
       // formData.append('Title', Title)
       // formData.append('News', News)
     }
 
-let data ={
-  Img,
-  Title,
-  News
-}
+      let data ={
+        Img,
+        Title,
+        News
+      }
 
     axios.post(url, data)
       .then(res =>
