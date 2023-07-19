@@ -7,10 +7,10 @@ import { changeOption } from 'src/redux/reducer';
 
 function ComboBox(props) {
     const dispatch = useDispatch();
-    const { autoComplete } = props;
+    const {autoComplete} = props;
     const [named, setNamed] = React.useState("")
     const handleChange = (newvalue) => {
-        dispatch(changeOption({name :newvalue}))
+        dispatch(changeOption({name : newvalue}))
 
         if (newvalue) {
             sessionStorage.setItem('categories', newvalue?.label)

@@ -39,7 +39,6 @@ return (
           <Typography variant="h4">
             {state ? state : "Please select category!"}
           </Typography>
-         
           <SettingsNotifications />
           {/* <SettingsPassword /> */}
         </Stack>

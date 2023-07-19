@@ -12,6 +12,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { serviceApi } from 'src/api docs/api';
 import { useSelector } from 'react-redux';
+import Load from './loader';
 
 
 export const SettingsNotifications = () => {
@@ -20,9 +21,11 @@ export const SettingsNotifications = () => {
   const [News, setNews] = useState("");
   const [Img, setImg] = useState("");
   const [showImg, setShowImg] = useState("");
+  const [state, setState] = useState(false);
   const sorce = "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_1280.png"
 
   const handleSubmit = (e) => {
+    setState(true)
     e.preventDefault();
     let url;
     // const formData = new FormData()
@@ -38,31 +41,59 @@ export const SettingsNotifications = () => {
       // formData.append('trend', Img)
       // formData.append('Title', Title)
       // formData.append('News', News)
+    } else if (option?.name?.label === null || option?.name?.label === undefined) {
+      toast("Please select category!")
     }
 
-      let data ={
-        Img,
-        Title,
-        News
-      }
+    let data = {
+      Img,
+      Title,
+      News
+    }
 
-    axios.post(url, data)
-      .then(res =>
-        toast(res.data.message),
-        setTitle(""),
-        setNews(""),
-        setImg(""),
-        setShowImg("")
-      )
-      .catch(er => toast(er?.response?.data))
+    if (data.Img && data.News && data.Title && option?.name?.label) {
+      axios.post(url, data)
+        .then(res =>
+          resValidation(res)
+        )
+        .catch(er => toast(er?.response?.data)
+        )
+    } else {
+      toast("Please fill all the fields.")
+      setState(false)
+    }
   }
+
+  const resValidation = (res) => {
+    if (res.status === 201) {
+      toast(res.data.message)
+      setTitle("")
+      setNews("")
+      setImg("")
+      setShowImg("")
+      setState(false)
+    }
+  }
+
   const handleChange = async (e) => {
     const file = e.target.files[0]
     const base64 = await new base64Conversion(file)
     setImg(base64)
-    // setShowImg(URL.createObjectURL(file))
+    setShowImg(URL.createObjectURL(file))
   }
 
+  function base64Conversion(file) {
+    return new Promise((resolve, reject) => {
+      const filReader = new FileReader();
+      filReader.readAsDataURL(file)
+      filReader.onload = () => {
+        resolve(filReader.result)
+      }
+      filReader.onerror = (err) => {
+        reject(err)
+      }
+    })
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -80,6 +111,7 @@ export const SettingsNotifications = () => {
           container
           spacing={6}
           wrap="wrap"
+
         >
           <Grid
             xs={12}
@@ -106,32 +138,23 @@ export const SettingsNotifications = () => {
                   accept='.jpeg , .png , .jpg'
                 />
                 <TextField value={Title} fullWidth label="Title" onChange={(e) => setTitle(e.target.value)} id="fullWidth" />
-                <textarea value={News} className='text-news' onChange={(e) => setNews(e.target.value)} placeholder='type news here'></textarea>
+                <textarea value={News} className='text-news' onChange={(e) => setNews(e.target.value)} placeholder='type news here' ></textarea>
               </Box>
             </Stack>
           </Grid>
         </Grid>
+
       </div>
       <Divider />
       <CardActions sx={{ justifyContent: 'flex-start' }}>
         <Button variant="contained" type='submit'>
           Post
         </Button>
+        {state ? <Load /> : null}
       </CardActions>
     </form>
   );
 };
 
-function base64Conversion(file) {
-  return new Promise((resolve, reject) => {
-    const filReader = new FileReader();
-    filReader.readAsDataURL(file)
-    filReader.onload = () => {
-      resolve(filReader.result)
-    }
-    filReader.onerror = (err) => {
-      reject(err)
-    }
-  })
-}
+
 

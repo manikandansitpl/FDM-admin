@@ -12,7 +12,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import optionReducer from '../redux/reducer'
 import 'simplebar-react/dist/simplebar.min.css';
-import"../../style.css";
+import "../../style.css";
 import 'react-toastify/dist/ReactToastify.css';
 
 const clientSideEmotionCache = createEmotionCache();

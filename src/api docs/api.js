@@ -1,5 +1,4 @@
 const admin = "https://tan-long-pigeon.cyclic.app/"
-// const admin  = "http://localhost:8000/"
 export const serviceApi = {
     latestPost: `${admin}api/person/fdmNews`,
     getLatestPost: `${admin}api/person/getNews`,
