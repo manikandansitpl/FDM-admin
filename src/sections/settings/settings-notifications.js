@@ -116,7 +116,7 @@ export const SettingsNotifications = () => {
           <Grid
             xs={12}
             sm={6}
-            md={4}
+            md={12}
           >
             <Stack spacing={1}>
               <Box
