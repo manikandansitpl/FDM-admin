@@ -72,6 +72,7 @@ export const SettingsNotifications = () => {
       setImg("")
       setShowImg("")
       setState(false)
+      window.scroll(0 ,0)
     }
   }
 
