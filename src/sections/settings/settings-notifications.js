@@ -22,6 +22,7 @@ export const SettingsNotifications = () => {
   const [Img, setImg] = useState("");
   const [showImg, setShowImg] = useState("");
   const [state, setState] = useState(false);
+  const [toastClass, setToastClass] = useState("")
   const sorce = "https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_1280.png"
 
   const handleSubmit = (e) => {
@@ -42,7 +43,7 @@ export const SettingsNotifications = () => {
       // formData.append('Title', Title)
       // formData.append('News', News)
     } else if (option?.name?.label === null || option?.name?.label === undefined) {
-      toast("Please select category!")
+      toast.warning("Please select category!", {toastId:'toast1'})
     }
 
     let data = {
@@ -54,19 +55,29 @@ export const SettingsNotifications = () => {
     if (data.Img && data.News && data.Title && option?.name?.label) {
       axios.post(url, data)
         .then(res =>
-          resValidation(res)
+          resValidation(res),
         )
-        .catch(er => toast(er?.response?.data)
+        .catch(er => 
+        handleError(er?.response?.data)
         )
     } else {
-      toast("Please fill all the fields.")
+      toast.warning("Please fill all the fields.", {toastId:'toast2'})
+      setState(false)
+      setToastClass("toastWarn")
+    }
+  }
+  const handleError = (er) => {
+    setToastClass("toastRed")
+    console.log(er);
+    if(er.message){
+      toast.error(er.message)
       setState(false)
     }
   }
-
   const resValidation = (res) => {
     if (res.status === 201) {
-      toast(res.data.message)
+      setToastClass("toastGreen")
+      toast.success(res.data.message)
       setTitle("")
       setNews("")
       setImg("")
@@ -104,7 +115,7 @@ export const SettingsNotifications = () => {
           pauseOnHover
           draggable
           rtl={false}
-          progressClassName="toastProgress"
+          progressClassName={toastClass}
           bodyClassName="toastBody"
         />
 
