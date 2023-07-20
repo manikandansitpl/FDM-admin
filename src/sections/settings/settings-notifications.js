@@ -32,12 +32,12 @@ export const SettingsNotifications = () => {
 
     // const url = serviceApi.latestPost;
     if (option?.name?.label === "Post Latest NEWS") {
-      url = serviceApi.latestPost;
+      url = "https://breakable-puce-lobster.cyclic.app/api/person/fdmNews";
       // formData.append('photo', )
       // formData.append('Title', Title)
       // formData.append('News', News)
     } else if (option?.name?.label === "Post Trending NEWS") {
-      url = serviceApi.trendingNews;
+      url = "https://breakable-puce-lobster.cyclic.app/api/person/trendingNews";
       // formData.append('trend', Img)
       // formData.append('Title', Title)
       // formData.append('News', News)

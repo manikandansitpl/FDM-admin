@@ -1,4 +1,4 @@
-const admin = "breakable-puce-lobster.cyclic.app"
+const admin = "breakable-puce-lobster.cyclic.app/";
 // https://breakable-puce-lobster.cyclic.app/api/person/trendingNews
 export const serviceApi = {
     latestPost: `${admin}api/person/fdmNews`,
