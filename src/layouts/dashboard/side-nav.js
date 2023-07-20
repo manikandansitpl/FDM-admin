@@ -165,7 +165,7 @@ export const SideNav = (props) => {
               </SvgIcon>
             )}
             fullWidth
-            href="https://material-kit-pro-react.devias.io/"
+            href="https://www.fdmclassic.com/"
             sx={{ mt: 2 }}
             target="_blank"
             variant="contained"
