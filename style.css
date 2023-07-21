@@ -35,18 +35,6 @@
     font-size: 0.875rem;
 }
 
-#toast1 {
-    color: rgb(255, 255, 255);
-    font-size: 0.875rem;
-    font-weight: 600;
-
-}
-
-#toast2 {
-    color: rgb(2, 52, 232); 
-    font-size: 0.875rem;
-    font-weight: 600;
-}
 .toastGreen {
     background: rgb(45, 197, 14) !important;
 }

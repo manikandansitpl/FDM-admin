@@ -66,10 +66,10 @@ export const SettingsNotifications = () => {
       setToastClass("toastWarn")
     }
   }
+
   const handleError = (er) => {
     setToastClass("toastRed")
-    console.log(er);
-    if(er.message){
+      if(er.message){
       toast.error(er.message)
       setState(false)
     }
